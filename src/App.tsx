@@ -1,9 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Logger from './components/Logger';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
+      <Logger />
     </div>
   );
 }

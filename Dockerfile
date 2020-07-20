@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:13.12.0-alpine AS builder
+FROM node:current-alpine AS initiator
 
 # set working directory
 WORKDIR /app
@@ -11,6 +11,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY yarn.lock ./
 RUN yarn --silent
+
+# pull  base image
+FROM node:current-alpine as builder
+COPY --from=initiator /app/node_modules /app/node_modules
+# set working directory
+WORKDIR /app
 COPY . ./
 RUN yarn build
 
