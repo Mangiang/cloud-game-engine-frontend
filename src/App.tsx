@@ -1,18 +1,25 @@
-import React from "react";
-import "./App.css";
-import Logger from './components/Logger';
-import IframeResizer from 'iframe-resizer-react'
+import React, { useState, Suspense } from 'react'
+import './App.css'
+import PluginLoader from './components/PluginLoader'
 
 const App = () => {
+  const [plugins, setPlugins] = useState<string[]>([])
+
   return (
     <div className="App">
-      <IframeResizer
-        src="http://localhost/plugins/logger"
-        style={{ width: '1px', minWidth: '100%'}}
-      />
-      <Logger />
+      <button onClick={(evt) => setPlugins(plugins.concat(['cloud-game-engine-logger-frontend']))}>
+        Add logger
+      </button>
+      {plugins.map((plugin: string) => (
+        <Suspense
+          key={plugin}
+          fallback={<h1>Chargement du plugin {plugin}...</h1>}
+        >
+          <PluginLoader name={plugin} />
+        </Suspense>
+      ))}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
