@@ -17,7 +17,7 @@ const PluginLoader = ({ name }: pluginProps) => {
     
     const releasesJson = await helmReleasesList.json();
     console.log(releasesJson);
-    const releasesList = JSON.parse(releasesJson.services.json)
+    const releasesList = JSON.parse(releasesJson.services)
     console.log(releasesList)
     const plugin = releasesList.find((obj: any) => obj.name === name)
     if (!plugin) {
@@ -43,6 +43,8 @@ const PluginLoader = ({ name }: pluginProps) => {
       }
     }
 
+    await sleep(10000)
+    
     const pingPlugin = await fetch(`http://localhost/plugins/${name}`)
     if (pingPlugin.status !== 200) return <p>Cannot load {name}</p>
 
