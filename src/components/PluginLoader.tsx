@@ -4,9 +4,10 @@ import usePromise from 'react-promise-suspense'
 
 type pluginProps = {
   name: string
+  className: string
 }
 
-const PluginLoader = ({ name }: pluginProps) => {
+const PluginLoader = ({ name, className }: pluginProps) => {
   const sleep = (milliseconds: number) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds))
   }
@@ -50,6 +51,7 @@ const PluginLoader = ({ name }: pluginProps) => {
 
     return (
       <IframeResizer
+        className={className}
         src={`http://localhost/plugins/${name}`}
         style={{ width: '1px', minWidth: '100%' }}
       />

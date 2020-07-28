@@ -7,9 +7,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <li>{plugins.map((plugin: string)=>(
-        <ul key={plugin}>{plugin}</ul>
-      ))}</li>
+      <ul>{plugins.map((plugin: string)=>(
+        <li key={plugin}>{plugin}</li>
+      ))}</ul>
       <button onClick={(evt) => setPlugins(plugins.concat(['cloud-game-engine-logger-frontend']))}>
         Add logger
       </button>
@@ -21,7 +21,7 @@ const App = () => {
           key={plugin}
           fallback={<h1>Chargement du plugin {plugin}...</h1>}
         >
-          <PluginLoader name={plugin} />
+          <PluginLoader className={plugin} name={plugin} />
         </Suspense>
       ))}
     </div>
